@@ -4,6 +4,8 @@
 class Period:
 
     def __init__(self, start, end, points):
+        self.start = start
+        self.end = end
         self.points = points
 
     def point_count(self):
@@ -17,7 +19,8 @@ def period_generator(list1, list2):
         [start, end] = [list1[i], list1[i+1]]
         points = []
         for i in range(start, end):
-
+            amount = list2.count(i)
+            points = points + amount * [i]
         periods.append(Period(start, end, points))
     return periods
 
@@ -27,5 +30,6 @@ if __name__ == "__main__":
     list2 = [14, 9, 24, 2, 44, 8, 41, 4, 46, 26,
              11, 31, 18, 24, 21, 4, 22, 50, 6, 36]
     periods = period_generator(list1, list2)
-    print(period[0].start, period[0].end,
-          period[0].points, period[0].point_count)
+    for p in periods:
+        print(p.start, p.end,
+              p.points, p.point_count())
