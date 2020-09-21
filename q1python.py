@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
 
 
-class Period:
-
-    def __init__(self, start, end, points):
-        self.start = start
-        self.end = end
-        self.points = points
-
-    def point_count(self):
-        return len(self.points)
-
-
 def period_generator(list1, list2):
+    class Period:
+
+        def __init__(self, start, end, points):
+            self.start = start
+            self.end = end
+            self.points = points
+
+        def point_count(self):
+            return len(self.points)
+
     periods = []
-    # print(range(len(list1) - 2))
     for i in range(len(list1) - 1):
         [start, end] = [list1[i], list1[i+1]]
         points = []
