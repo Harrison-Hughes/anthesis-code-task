@@ -1,5 +1,5 @@
 import unittest
-import period_generator as period_generator
+from q1python import period_generator
 
 # All periods and data points must be whole numbers
 # There can only ever be a maximum of 10 periods
@@ -13,24 +13,54 @@ list2 = [14, 9, 24, 2, 44, 8, 41, 4, 46, 26,
          11, 31, 18, 24, 21, 4, 22, 50, 6, 36]
 
 
-class PeriodGenerator(unittest.TestCase):
+class TestPeriodGenerator(unittest.TestCase):
 
     # the result of this test depends solely on the values of list1 and list2
-    def all_periods_and_data_points_whole_numbers(self):
+    def test_all_periods_and_data_points_whole_numbers(self):
         periods = period_generator(list1, list2)
 
         # all periods integers
-        self.assertTrue(all(isinstance(num, int) for num in list1)
+        self.assertTrue(all(isinstance(period.start, int) and isinstance(
+            period.end, int) for period in periods))
 
         # all points integers
-        self.assertTrue(all(isinstance(period.start, int) and isinstance(period.end, int) for period in periods)
+        self.assertTrue(all(all(isinstance(point, int)
+                                for point in period.points) for period in periods))
 
     # similarly, the result of this test depends solely on the amount of values in list1
-    def max_of_ten_periods(self):
-        self.assertTrue
+    def test_max_of_ten_periods(self):
+        periods = period_generator(list1, list2)
 
-    def period_no_longer_than_ten_secs(self):
+        self.assertTrue(len(periods) <= 10)
 
-    def each_period_contains_between_one_and_ten_data_points(self):
+    # similarly, the result of this test depends solely on the values of list1
+    def test_period_no_longer_than_ten_secs(self):
+        periods = period_generator(list1, list2)
 
-    def points_ordered_by_ascending(self):
+        for period in periods:
+            print((period.end - period.start))
+
+        self.assertTrue(all((period.end - period.start) <=
+                            10 for period in periods))
+
+    def test_each_period_contains_between_one_and_ten_data_points(self):
+        periods = period_generator(list1, list2)
+
+        self.assertTrue(all(1 <= len(period.points)
+                            <= 10 for period in periods))
+
+    def test_points_ordered_by_ascending(self):
+        periods = period_generator(list1, list2)
+
+        def list_is_ascending(list):
+            output = True
+            for i in range(len(list) - 1):
+                if list[i+1] < list[i]:
+                    output = False
+            return output
+
+        self.assertTrue(all(list_is_ascending(period.points)
+                            for period in periods))
+
+# the program will NOT pass with the data set provided, due to the 3rd criteria (that there can only ever be a maximum of 10 periods),
+# as the penultimate period has a gap of 14 seconds (between 26 and 40)
