@@ -25,11 +25,11 @@ def period_generator(list1, list2):
     return periods
 
 
-if __name__ == "__main__":
-    list1 = [1, 5, 6, 10, 11, 20, 21, 25, 26, 40, 41, 50]
-    list2 = [14, 9, 24, 2, 44, 8, 41, 4, 46, 26,
-             11, 31, 18, 24, 21, 4, 22, 50, 6, 36]
-    periods = period_generator(list1, list2)
-    for p in periods:
-        print(p.start, p.end,
-              p.points, p.point_count())
+# if __name__ == "__main__":
+#     list1 = [1, 5, 6, 10, 11, 20, 21, 25, 26, 40, 41, 50]
+#     list2 = [14, 9, 24, 2, 44, 8, 41, 4, 46, 26,
+#              11, 31, 18, 24, 21, 4, 22, 50, 6, 36]
+#     periods = period_generator(list1, list2)
+#     for p in periods:
+#         print(p.start, p.end,
+#               p.points, p.point_count())
