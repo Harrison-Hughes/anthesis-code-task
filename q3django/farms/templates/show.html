@@ -1,20 +1,22 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Farm: {{ farm.name }}</h1>
-<h3>Fields:</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Produce</th>
-      <th>Size (km^2)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for f in fields %}
-    <tr>
-      <td>{{f.produce}}</td>
-      <td>{{f.size_in_sq_km}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<main class="container">
+  <h1>Farm: {{ farm.name }}</h1>
+  <h3>Fields:</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Produce</th>
+        <th>Size (km^2)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for f in fields %}
+      <tr>
+        <td>{{f.produce}}</td>
+        <td>{{f.size_in_sq_km}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</main>
 {% endblock %}
