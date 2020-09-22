@@ -1,6 +1,7 @@
 import unittest
 from q1python import period_generator
 
+# CRITERIA:
 # All periods and data points must be whole numbers
 # There can only ever be a maximum of 10 periods
 # Each point represents one second - a period may be no longer than 10 seconds
@@ -62,5 +63,5 @@ class TestPeriodGenerator(unittest.TestCase):
         self.assertTrue(all(list_is_ascending(period.points)
                             for period in periods))
 
-# the program will NOT pass with the data set provided, due to the 3rd criteria (that there can only ever be a maximum of 10 periods),
+# the program will NOT pass with the data set provided, due to the 3rd criteria (that a period can be no longer than 10 seconds),
 # as the penultimate period has a gap of 14 seconds (between 26 and 40)
