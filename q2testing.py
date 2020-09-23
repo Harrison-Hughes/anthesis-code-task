@@ -16,7 +16,7 @@ list2 = [14, 9, 24, 2, 44, 8, 41, 4, 46, 26,
 
 class TestPeriodGenerator(unittest.TestCase):
 
-    # the result of this test depends solely on the values of list1 and list2
+    # the result of this test depends on the values of list1 and list2
     def test_all_periods_and_data_points_whole_numbers(self):
         periods = period_generator(list1, list2)
 
@@ -28,13 +28,13 @@ class TestPeriodGenerator(unittest.TestCase):
         self.assertTrue(all(all(isinstance(point, int)
                                 for point in period.points) for period in periods))
 
-    # similarly, the result of this test depends solely on the amount of values in list1
+    # similarly, the result of this test depends on the amount of values in list1
     def test_max_of_ten_periods(self):
         periods = period_generator(list1, list2)
 
         self.assertTrue(len(periods) <= 10)
 
-    # similarly, the result of this test depends solely on the values of list1
+    # similarly, the result of this test depends on the values of list1
     def test_period_no_longer_than_ten_secs(self):
         periods = period_generator(list1, list2)
 
