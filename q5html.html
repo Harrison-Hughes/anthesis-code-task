@@ -53,6 +53,7 @@
                 form="my_form"
                 id="password"
                 onchange="password_strength()"
+                onkeyup="checkNonEmptyFields()"
               />
             </td>
           </tr>
@@ -67,6 +68,7 @@
                 form="my_form"
                 id="password_confirm"
                 oninput="check(this)"
+                onkeyup="checkNonEmptyFields()"
               />
             </td>
           </tr>
@@ -74,7 +76,7 @@
       </table>
       <p id="password_strength">Password strength: weak</p>
       <p><i id="password_tip">(try more than 6 characters)</i></p>
-      <input type="submit" value="Submit" form="my_form" />
+      <input id="submit" type="submit" value="Submit" form="my_form" disabled />
     </main>
 
     <!-- Optional JavaScript -->
@@ -86,6 +88,17 @@
         } else {
           // input is valid -- reset the error message
           input.setCustomValidity("");
+        }
+      }
+
+      function checkNonEmptyFields() {
+        let password = document.getElementById("password").value;
+        let password_confirm = document.getElementById("password_confirm")
+          .value;
+        if (password.length > 0 && password_confirm.length > 0) {
+          document.getElementById("submit").disabled = false;
+        } else {
+          document.getElementById("submit").disabled = true;
         }
       }
 
