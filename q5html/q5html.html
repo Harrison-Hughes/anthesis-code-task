@@ -22,7 +22,7 @@
     <main class="container">
       <h1>registration form</h1>
       <form id="my_form"></form>
-      <table class="table table-bordered">
+      <table class="table table-bordered" id="table">
         <tbody>
           <tr>
             <td><label>company:</label></td>
@@ -46,22 +46,84 @@
           </tr>
           <tr>
             <td><label>password:</label></td>
-            <td><input type="password" name="password" form="my_form" /></td>
+            <td>
+              <input
+                type="password"
+                name="password"
+                form="my_form"
+                id="password"
+                onchange="password_strength()"
+              />
+            </td>
           </tr>
           <tr>
             <td>
               <label>password confirm:</label>
             </td>
             <td>
-              <input type="password" name="password_confirm" form="my_form" />
+              <input
+                type="password"
+                name="password_confirm"
+                form="my_form"
+                id="password_confirm"
+                oninput="check(this)"
+              />
             </td>
           </tr>
         </tbody>
       </table>
+      <p id="password_strength">Password strength: weak</p>
+      <p><i id="password_tip">(try more than 6 characters)</i></p>
       <input type="submit" value="Submit" form="my_form" />
     </main>
 
     <!-- Optional JavaScript -->
+
+    <script language="javascript" type="text/javascript">
+      function check(input) {
+        if (input.value != document.getElementById("password").value) {
+          input.setCustomValidity("Passwords do not match!");
+        } else {
+          // input is valid -- reset the error message
+          input.setCustomValidity("");
+        }
+      }
+
+      function hasUpperCaseChars(str) {
+        var count = 0,
+          len = str.length;
+        for (var i = 0; i < len; i++) {
+          if (/[A-Z]/.test(str.charAt(i))) count++;
+        }
+        if (count > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function password_strength() {
+        let password = document.getElementById("password").value;
+        let prev_element = document.getElementById("table");
+        if (password.length < 6) {
+          document.getElementById("password_strength").innerHTML =
+            "Password strength: weak";
+          document.getElementById("password_tip").innerHTML =
+            "(try more than 6 characters)";
+        } else {
+          if (hasUpperCaseChars(password)) {
+            document.getElementById("password_strength").innerHTML =
+              "Password strength: strong";
+            document.getElementById("password_tip").innerHTML = "";
+          } else {
+            document.getElementById("password_strength").innerHTML =
+              "Password strength: medium";
+            document.getElementById("password_tip").innerHTML =
+              "(try adding a mix of upper and lower case letters)";
+          }
+        }
+      }
+    </script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
